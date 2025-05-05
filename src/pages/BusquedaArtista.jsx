@@ -6,6 +6,9 @@ function BusquedaArtista(){
   const CLIENT_SECRET = "1da5735ec4c94ea290ee06994f65ad09"
 
   const [artista, setArtista] = useState([])
+  const [token, setToken] = useState("")
+  const [artistaSeleccionado, setArtistaSeleccionado] = useState(null)
+
   function pedirToken() {
     axios.post("https://accounts.spotify.com/api/token",
     {
@@ -25,30 +28,31 @@ function BusquedaArtista(){
       console.log(error)
     })
   }
-
-  function buscarArtista(artista){
-    axios.get(`https://api.spotify.com/v1/search?q=${artista}&type=artist`)
-    .then((data) => {
-      console.log(data.data.artista.items)
-      setArtista(data.data.artista.items)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
-        
-  useEffect(() => {
-    pedirToken()
-  })
-    
   return (
     <div className="Busqueda Artista">
-      <h1>Artista</h1>
-      <ul>
-        {artista.map((artista, index) => {
-          return <li key={index}>{artista.name}</li>
-        })}
-      </ul>
+      <FormularioBusqueda buscarArtista={buscarArtista} />
+  
+      {!artistaSeleccionado && (
+        <>
+          <h1>Artistas</h1>
+          <ul>
+            {artista.map((artista, index) => (
+              <li key={index} onClick={() => setArtistaSeleccionado(artista)}>
+                {artista.name}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+  
+      {artistaSeleccionado && (
+        <div>
+          <DetalleArtista artista={artistaSeleccionado} />
+          <Album idArtista={artistaSeleccionado.id} token={token} />
+        </div>
+      )}
     </div>
-  );  
+  );
 }
+
 export default BusquedaArtista
