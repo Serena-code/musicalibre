@@ -3,7 +3,8 @@ import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { FormularioBusqueda } from '../componentes/FormularioBusqueda'
 import DetalleArtista from '../componentes/DetalleArtista'
-import Album from './Album'
+import { Album } from './Album'
+
 
 function BusquedaArtista() {
   const CLIENT_ID = "6b78425f682040b4a31811c058a3e765"
@@ -70,7 +71,8 @@ function BusquedaArtista() {
           <ul>
             {artista.map((artista, index) => (
               <li key={index} onClick={() => setArtistaSeleccionado(artista)}>
-                {artista.name}
+                <h1>{artista.name}</h1>
+                <img src={artista.images[0].url} alt={artista.name} />
               </li>
             ))}
           </ul>
@@ -80,7 +82,11 @@ function BusquedaArtista() {
       {artistaSeleccionado && (
         <div>
           <DetalleArtista artista={artistaSeleccionado} />
-          <Album idArtista={artistaSeleccionado.id} token={token} />
+          <Album
+          artista = {artistaSeleccionado.id} 
+          token = {token}
+          />
+         
         </div>
       )}
     </div>

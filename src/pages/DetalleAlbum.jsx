@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-function Album({ idArtista, token }) {
-  const [album, setAlbum] = useState([])
+export function DetalleAlbum({ idAlbum, token }) {
+  const [detalle, setDetalle] = useState([])
 
-  function buscarAlbum(id) {
-    axios.get(`https://api.spotify.com/v1/artists/${id}/albums`, {
+  function buscarDetalle(id) {
+    axios.get(`https://api.spotify.com/v1/albums/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then((data) => {
-      setAlbum(data.data.items)
+      setDetalle(data.data.tracks.items)
     })
     .catch((error) => {
       console.log(error)
@@ -17,21 +17,21 @@ function Album({ idArtista, token }) {
   }
 
   useEffect(() => {
-    if (idArtista && token) {
-      buscarAlbum(idArtista)
+    if (idAlbum && token) {
+      buscarDetalle(idAlbum)
     }
-  }, [idArtista, token])
-
+  }, [idAlbum, token])
+  
   return (
-    <div className="Album">
-      <h1>Albumes</h1>
+    <div className="buscarDetalle">
+      <h1>{detalle.name}</h1>
+      <h1>Detalle</h1>
       <ul>
-        {album.map((album, index) => (
-          <li key={index}>{album.name}</li>
+        {detalle.map((detalle, index) => (
+          <li key={index}>{detalle.name}{detalle.duration_ms}</li>
         ))}
       </ul>
     </div>
   )
 }
 
-export default Album
