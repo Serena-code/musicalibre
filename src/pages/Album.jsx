@@ -24,6 +24,7 @@ function Album({ idArtista, token }) {
 
   return (
     <div className="Album">
+      <h1>Albumes</h1>
       <ul>
         {album.map((album, index) => (
           <li key={index}>{album.name}</li>
@@ -33,4 +34,3 @@ function Album({ idArtista, token }) {
   )
 }
 
-export default Album
