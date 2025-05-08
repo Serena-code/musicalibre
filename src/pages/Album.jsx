@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ArtistaAlbum } from '../componentes/ArtistaAlbum'
 import { DetalleAlbum } from './DetalleAlbum'
+import { Link } from "react-router-dom"
 
 export function Album({ artista, token }) {
   const [album, setAlbum] = useState([])
@@ -27,6 +28,9 @@ export function Album({ artista, token }) {
 
   return (
     <div className="Album">
+      <Link to={"/ArtistaAlbum"} className='btn'>
+        Volver
+      </Link>
       {!albumSeleccionado && (
         <>
           <h1>Albumes</h1>
@@ -43,11 +47,11 @@ export function Album({ artista, token }) {
   
       {albumSeleccionado && (
         <div>
-          <ArtistaAlbum id={albumSeleccionado}></ArtistaAlbum>
-          <DetalleAlbum idAlbum={albumSeleccionado.id} token={token}></DetalleAlbum>
+          <ArtistaAlbum id={albumSeleccionado} token={token}></ArtistaAlbum>
         </div>
       )}
       
+     
     </div>
   )
 }

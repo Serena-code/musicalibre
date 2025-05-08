@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export function FormularioBusqueda ({buscarArtista}) {
+export function FormularioBusqueda ({}) {
     const [valorInput , setValorInput] = useState("")
-
+    const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
-        buscarArtista(valorInput)
+        navigate(`/BusquedaArtista/${encodeURIComponent(valorInput)}`)
     }
 
     return(

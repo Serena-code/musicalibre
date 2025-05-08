@@ -4,8 +4,8 @@ import axios from 'axios'
 export function DetalleAlbum({ idAlbum, token }) {
   const [detalle, setDetalle] = useState([])
 
-  function buscarDetalle(id) {
-    axios.get(`https://api.spotify.com/v1/albums/${id}`, {
+  function buscarDetalle(id,token) {
+    axios.get(`https://api.spotify.com/v1/artists/${id}/albums/`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then((data) => {
@@ -18,7 +18,7 @@ export function DetalleAlbum({ idAlbum, token }) {
 
   useEffect(() => {
     if (idAlbum && token) {
-      buscarDetalle(idAlbum)
+      buscarDetalle(idAlbum,token)
     }
   }, [idAlbum, token])
   

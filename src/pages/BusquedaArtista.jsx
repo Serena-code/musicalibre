@@ -1,19 +1,18 @@
 import axios from 'axios'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
-import { FormularioBusqueda } from '../componentes/FormularioBusqueda'
-import DetalleArtista from '../componentes/DetalleArtista'
-import { Album } from './Album'
+import {DetalleArtista} from '../componentes/DetalleArtista'
+import { useParams,Link } from 'react-router-dom'
 
-
-function BusquedaArtista() {
+export function BusquedaArtista() {
   const CLIENT_ID = "6b78425f682040b4a31811c058a3e765"
   const CLIENT_SECRET = "1da5735ec4c94ea290ee06994f65ad09"
 
+  const[artistaSeleccionado,setArtistaSeleccionado] = useState("")
+  const{nombreArtista} = useParams()
   const [artista, setArtista] = useState([])
   const [token, setToken] = useState("")
-  const [artistaSeleccionado, setArtistaSeleccionado] = useState(null)
-
+  
   function pedirToken() {
     const auth = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)
 
@@ -29,18 +28,17 @@ function BusquedaArtista() {
     .then((data) => {
       console.log(`Token recibido: ${data.data.access_token}`)
       setToken(data.data.access_token)
+      buscarArtista(data.data.access_token)
+      
     })
     .catch((error) => {
       console.log(`Error: ${error}`)
     })
+    
   }
 
-  function buscarArtista(nombreArtista) {
-    if (!token) {
-      console.warn("Token aún no disponible.")
-      return
-    }
-
+  function buscarArtista(token) {
+    
     axios.get("https://api.spotify.com/v1/search", {
       headers: { Authorization: `Bearer ${token}` },
       params: {
@@ -55,25 +53,30 @@ function BusquedaArtista() {
     .catch((error) => {
       console.log(error)
     })
+    console.log(artista)
   }
 
   useEffect(() => {
     pedirToken()
+
   }, [])
 
+ 
+
   return (
-    <div className="Busqueda Artista">
-      <FormularioBusqueda buscarArtista={buscarArtista} />
-  
+    <div className="BusquedaArtista">
       {!artistaSeleccionado && (
         <>
           <h1>Artistas</h1>
+          <Link to={"/"} className='btn'>
+            Volver
+          </Link>
           <ul>
             {artista.map((artista, index) => (
-              <li key={index} onClick={() => setArtistaSeleccionado(artista)}>
-                <h1>{artista.name}</h1>
-                <img src={artista.images[0].url} alt={artista.name} />
-              </li>
+            <li key={index} onClick={() => setArtistaSeleccionado(artista)}>
+              <h1>{artista.name}</h1>
+              <img src={artista.images[0].url} alt={artista.name} />
+            </li>
             ))}
           </ul>
         </>
@@ -81,16 +84,11 @@ function BusquedaArtista() {
   
       {artistaSeleccionado && (
         <div>
-          <DetalleArtista artista={artistaSeleccionado} />
-          <Album
-          artista = {artistaSeleccionado.id} 
-          token = {token}
-          />
-         
+          <DetalleArtista artista={artistaSeleccionado} token={token} />              
         </div>
       )}
+  
     </div>
   );
 }
 
-export default BusquedaArtista
