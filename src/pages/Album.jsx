@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ArtistaAlbum } from '../componentes/ArtistaAlbum'
-import { DetalleAlbum } from './DetalleAlbum'
-import { Link } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 
-export function Album({ artista, token }) {
+export function Album({ artista }) {
+  const navigate = useNavigate();
   const [album, setAlbum] = useState([])
   const [albumSeleccionado, setAlbumSeleccionado] = useState(null)
-
-  function buscarAlbum(id) {
-    axios.get(`https://api.spotify.com/v1/artists/${id}/albums`, {
-      headers: { Authorization: `Bearer ${token}` }
+  
+  const handleVolver = () => {
+    navigate(`/BusquedaArtista/${encodeURIComponent(artista)}`) // Vuelve a la página anterior en el historial del navegador
+  };
+  
+  function buscarAlbum(artista) {
+    axios.get(`https://api.spotify.com/v1/artists/${artista.id}/albums`, {
     })
     .then((data) => {
       setAlbum(data.data.items)
@@ -21,16 +24,16 @@ export function Album({ artista, token }) {
   }
 
   useEffect(() => {
-    if (artista && token) {
+    if (artista) {
       buscarAlbum(artista)
     }
-  }, [artista, token])
+  }, [artista])
 
   return (
     <div className="Album">
-      <Link to={"/ArtistaAlbum"} className='btn'>
+      <button onClick={handleVolver} className='btn'>
         Volver
-      </Link>
+      </button>
       {!albumSeleccionado && (
         <>
           <h1>Albumes</h1>
@@ -47,7 +50,7 @@ export function Album({ artista, token }) {
   
       {albumSeleccionado && (
         <div>
-          <ArtistaAlbum id={albumSeleccionado} token={token}></ArtistaAlbum>
+          <ArtistaAlbum id={albumSeleccionado} ></ArtistaAlbum>
         </div>
       )}
       

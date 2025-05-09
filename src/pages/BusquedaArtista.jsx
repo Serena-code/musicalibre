@@ -1,5 +1,4 @@
 import axios from 'axios'
-import qs from 'qs'
 import { useEffect, useState } from 'react'
 import {DetalleArtista} from '../componentes/DetalleArtista'
 import { useParams,Link } from 'react-router-dom'
@@ -11,24 +10,27 @@ export function BusquedaArtista() {
   const[artistaSeleccionado,setArtistaSeleccionado] = useState("")
   const{nombreArtista} = useParams()
   const [artista, setArtista] = useState([])
-  const [token, setToken] = useState("")
+  
   
   function pedirToken() {
-    const auth = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)
 
     axios.post("https://accounts.spotify.com/api/token",
-      qs.stringify({ grant_type: "client_credentials" }),
+      {
+        grant_type:"client_credentials",
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET
+      },
       {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Basic ${auth}`
-        }
+         "Content-Type": "application/x-www-form-urlencoded"
+        },
       }
+      
     )
     .then((data) => {
       console.log(`Token recibido: ${data.data.access_token}`)
-      setToken(data.data.access_token)
-      buscarArtista(data.data.access_token)
+      axios.defaults.headers.common['Authorization'] = "Bearer " + data.data.access_token;
+      buscarArtista()
       
     })
     .catch((error) => {
@@ -37,14 +39,9 @@ export function BusquedaArtista() {
     
   }
 
-  function buscarArtista(token) {
+  function buscarArtista() {
     
-    axios.get("https://api.spotify.com/v1/search", {
-      headers: { Authorization: `Bearer ${token}` },
-      params: {
-        q: nombreArtista,
-        type: "artist",
-      },
+    axios.get(`https://api.spotify.com/v1/search?q=${nombreArtista}&type=artist`, {
     })
     .then((data) => {
       console.log(data.data.artists.items)
@@ -75,7 +72,7 @@ export function BusquedaArtista() {
             {artista.map((artista, index) => (
             <li key={index} onClick={() => setArtistaSeleccionado(artista)}>
               <h1>{artista.name}</h1>
-              <img src={artista.images[0].url} alt={artista.name} />
+              <img src={artista.images?.[0].url} alt={artista.name} />
             </li>
             ))}
           </ul>
@@ -84,7 +81,7 @@ export function BusquedaArtista() {
   
       {artistaSeleccionado && (
         <div>
-          <DetalleArtista artista={artistaSeleccionado} token={token} />              
+          <DetalleArtista artista={artistaSeleccionado} />              
         </div>
       )}
   

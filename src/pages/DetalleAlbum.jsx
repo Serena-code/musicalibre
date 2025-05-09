@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-export function DetalleAlbum({ idAlbum, token }) {
+export function DetalleAlbum({ idAlbum }) {
   const [detalle, setDetalle] = useState([])
 
-  function buscarDetalle(id,token) {
-    axios.get(`https://api.spotify.com/v1/artists/${id}/albums/`, {
-      headers: { Authorization: `Bearer ${token}` }
+  function buscarDetalle(id) {
+    axios.get(`https://api.spotify.com/v1/albums/${id}`, {
     })
     .then((data) => {
       setDetalle(data.data.tracks.items)
@@ -17,13 +17,16 @@ export function DetalleAlbum({ idAlbum, token }) {
   }
 
   useEffect(() => {
-    if (idAlbum && token) {
-      buscarDetalle(idAlbum,token)
+    if (idAlbum) {
+      buscarDetalle(idAlbum)
     }
-  }, [idAlbum, token])
+  }, [idAlbum])
   
   return (
     <div className="buscarDetalle">
+      <Link to={"/"} className='btn'>
+        Home
+      </Link>
       <h1>{detalle.name}</h1>
       <h1>Detalle</h1>
       <ul>
