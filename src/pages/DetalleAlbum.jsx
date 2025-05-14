@@ -25,7 +25,7 @@ export function DetalleAlbum({ idAlbum }) {
   return (
     <div className="buscarDetalle">
       <Link to={"/"} className='btn'>
-        Home
+        Inicio
       </Link>
       <h1>{detalle.name}</h1>
       <h1>Detalle</h1>
