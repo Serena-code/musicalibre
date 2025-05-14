@@ -66,50 +66,52 @@ export function BusquedaArtista({ artistasFavoritos, agregarArtistaFavorito, eli
 
   return (
     <div className="BusquedaArtista">
-      <div className="ListaFavoritos">
-        <h2>Artistas Favoritos</h2>
-        {artistasFavoritos.length === 0 ? (
-          <p>No hay artistas favoritos aún.</p>
-        ) : (
-          <ul>
-            {artistasFavoritos.map(artist => (
-              <li key={artist.id} onClick={() => manejarFavorito(artist)}> 
-                <img src={artist.imageUrl} alt={artist.name} />
-                <h2>{artist.name}</h2>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      {!artistaSeleccionado ? (
-        <>
-          <h1>Resultados de búsqueda para "{nombreArtista}"</h1>
-          <Link to="/" className="btn">
-            Nueva Búsqueda
-          </Link>
-          <ul>
-            {artistas.map((artista, index) => (
-              <li key={index} onClick={() => setArtistaSeleccionado(artista)}>
-                <h1>{artista.name}</h1>
-                <img
-                  src={artista.images?.[0]?.url}
-                  alt={artista.name}
-                />
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-
-        <DetalleArtista
-          artista={artistaSeleccionado}
-          agregarArtistaFavorito={agregarArtistaFavorito} 
-          eliminarArtistaFavorito={eliminarArtistaFavorito} 
-          esArtistaFavorito={esArtistaFavorito} 
-        />
-      )}
+      <div className="ContenedorPrincipalBusqueda">
+        <div className="ListaFavoritos">
+          <h2>Artistas Favoritos</h2>
+          {artistasFavoritos.length === 0 ? (
+            <p>No hay artistas favoritos aún.</p>
+          ) : (
+            <ul>
+              {artistasFavoritos.map(artist => (
+                <li key={artist.id} onClick={() => manejarFavorito(artist)}>
+                  <img src={artist.imageUrl} alt={artist.name} />
+                  <h2>{artist.name}</h2>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div className="SeccionPrincipalBusqueda">
+          {!artistaSeleccionado ? (
+            <>
+              <h1>Resultados de búsqueda para "{nombreArtista}"</h1>
+              <Link to="/" className="btn">
+                Nueva Búsqueda
+              </Link>
+              <ul>
+                {artistas.map((artista, index) => (
+                  <li key={index} onClick={() => setArtistaSeleccionado(artista)}>
+                    <h1>{artista.name}</h1>
+                    <img
+                      src={artista.images?.[0]?.url}
+                      alt={artista.name}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <DetalleArtista
+              artista={artistaSeleccionado}
+              agregarArtistaFavorito={agregarArtistaFavorito}
+              eliminarArtistaFavorito={eliminarArtistaFavorito}
+              esArtistaFavorito={esArtistaFavorito}
+              alVolver={() => setArtistaSeleccionado(null)}
+            />
+          )}
+        </div>
+      </div> 
     </div>
   );
 }
-

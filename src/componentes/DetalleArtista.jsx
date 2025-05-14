@@ -18,17 +18,22 @@ export function DetalleArtista({ artista, agregarArtistaFavorito, eliminarArtist
   };
 
   return (
-      <div className="DetalleArtista">
-        <button onClick={alVolver} className="btn"> 
+    <div className="DetalleArtista">
+        <button onClick={alVolver} className="btn">
            Volver a la Búsqueda
         </button>
 
-        <h2>{artista.name}</h2>
-        <img src={artista.images?.[0]?.url} alt={artista.name} /> 
+        <div className="InfoArtistaDetalle">
+            <img src={artista.images?.[0]?.url} alt={artista.name} />
+            
+            <div className="NombreYFavorito">
+                <h2>{artista.name}</h2>
+                <button onClick={manejarFavorito} className="btn-favorito"> 
+                  {esFavorito ? "Quitar de Favoritos" : "Marcar como Favorito"}
+                </button>
+            </div>
+        </div>
 
-        <button onClick={manejarFavorito}> 
-          {esFavorito ? "Quitar de Favoritos" : "Marcar como Favorito"} 
-        </button>
 
         <Album artista ={artista} ></Album>
       </div>

@@ -1,0 +1,449 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121212; 
+    color: #b3b3b3; 
+    font-family: 'Arial', sans-serif; 
+}
+
+.btn{
+  padding: 8px 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #23d260; 
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  outline: none;
+}
+
+/* Formulario de busqueda */
+
+.FormularioBusqueda {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 600px; 
+}
+
+.FormularioBusqueda form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px; 
+  padding: 20px;
+  background-color: #1a1a1a; 
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.FormularioBusqueda input {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 25px;
+  background-color: #2a2a2a; 
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.FormularioBusqueda input:focus {
+  background-color: #3a3a3a;
+  box-shadow: 0 0 0 2px #23d260; 
+}
+
+.FormularioBusqueda button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #23d260; 
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+.FormularioBusqueda button:hover {
+  background-color: #23d260;
+}
+
+.btn:hover {
+    background-color: #6a6a6a;
+}
+
+/* Busqueda artista */
+
+.BusquedaArtista {
+  padding: 0;
+  background-color: #121212;
+  min-height: 800px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ContenedorPrincipalBusqueda {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.ListaFavoritos {
+  width: 250px;
+  flex-shrink: 0;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ListaFavoritos h2 {
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.ListaFavoritos p {
+  color: #b3b3b3;
+  font-style: italic;
+  font-size: 14px;
+  text-align: center;
+}
+
+.ListaFavoritos ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ListaFavoritos li {
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ListaFavoritos li:hover {
+  background-color: #3a3a3a;
+}
+
+.ListaFavoritos li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.ListaFavoritos li h2 {
+    color: #ffffff;
+    font-size: 14px;
+    margin: 0;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.SeccionPrincipalBusqueda {
+  flex-grow: 1;
+}
+
+.SeccionPrincipalBusqueda h1 {
+  color: #ffffff;
+  font-size: 32px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  align-items: center
+}
+
+.SeccionPrincipalBusqueda ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.SeccionPrincipalBusqueda ul li {
+  background-color: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.SeccionPrincipalBusqueda ul li:hover {
+  background-color: #2a2a2a;
+  transform: translateY(-5px);
+}
+
+.SeccionPrincipalBusqueda ul li h1 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.SeccionPrincipalBusqueda ul li img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.SeccionPrincipalBusqueda .btn {
+  margin-bottom: 20px;
+}
+
+.DetalleArtista .btn {
+  margin-bottom: 20px;
+}
+
+/* Detalle Artista */
+
+.DetalleArtista {
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.InfoArtistaDetalle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.DetalleArtista img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.NombreYFavorito {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.DetalleArtista h2 {
+  color: #ffffff;
+  font-size: 32px;
+  margin: 0;
+  text-align: left;
+}
+
+.DetalleArtista .btn-favorito {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #23d260; 
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  outline: none;
+}
+
+.DetalleArtista .btn-favorito:hover {
+  background-color: #23d260; 
+}
+
+.DetalleArtista .btn-favorito:active {
+  transform: scale(0.98);
+}
+
+.DetalleArtista .btn {
+    margin-bottom: 0;
+}
+.ArtistaAlbum {
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.ArtistaAlbum h1 {
+  color: #ffffff;
+  font-size: 32px;
+  margin: 0;
+  text-align: center;
+}
+
+.ArtistaAlbum h2 {
+  color: #b3b3b3;
+  font-size: 16px;
+  margin: 0;
+  text-align: center;
+}
+
+.ArtistaAlbum img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.Album {
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+.Album h1 {
+    color: #ffffff;
+    font-size: 32px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.Album .btn {
+    margin-bottom: 20px;
+}
+
+.Album ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.Album ul li {
+  background-color: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Album ul li:hover {
+  background-color: #3a3a3a;
+  transform: translateY(-5px);
+}
+
+.Album ul li img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  align-self: center;
+}
+
+.Album ul li h1 {
+  color: #ffffff;
+  font-size: 18px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Album ul li h2 {
+  color: #b3b3b3;
+  font-size: 14px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.buscarDetalle {
+  padding: 20px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.buscarDetalle h1 {
+    color: #ffffff;
+    font-size: 24px;
+    margin: 0;
+}
+
+.buscarDetalle ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.buscarDetalle li {
+  background-color: #3a3a3a;
+  padding: 10px 15px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buscarDetalle .btn {
+    align-self: flex-start;
+    margin-bottom: 0;
+}

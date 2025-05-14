@@ -8,10 +8,6 @@ export function Album({ artista }) {
   const [album, setAlbum] = useState([])
   const [albumSeleccionado, setAlbumSeleccionado] = useState(null)
   
-  const handleVolver = () => {
-    navigate(`/BusquedaArtista/${encodeURIComponent(artista)}`) // Vuelve a la página anterior en el historial del navegador
-  };
-  
   function buscarAlbum(artista) {
     axios.get(`https://api.spotify.com/v1/artists/${artista.id}/albums`, {
     })
@@ -31,9 +27,6 @@ export function Album({ artista }) {
 
   return (
     <div className="Album">
-      <button onClick={handleVolver} className='btn'>
-        Volver
-      </button>
       {!albumSeleccionado && (
         <>
           <h1>Albumes</h1>
