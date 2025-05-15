@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { DetalleArtista } from '../componentes/DetalleArtista';
 import { useParams, Link } from 'react-router-dom';
+import qs from 'qs';
 
 let spotifyToken = null;
 
@@ -14,33 +15,35 @@ export function BusquedaArtista({ artistasFavoritos, agregarArtistaFavorito, eli
   const [artistas, setArtistas] = useState([]);
 
   function pedirToken() {
-     if (spotifyToken) {
-       axios.defaults.headers.common['Authorization'] = `Bearer ${spotifyToken}`;
-       buscarArtista();
-       return;
-     }
-
-     axios.post(
-       "https://accounts.spotify.com/api/token",
-       `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`,
-       {
-         headers: {
-           "Content-Type": "application/x-www-form-urlencoded"
-         }
-       }
-     )
-     .then(({ data }) => {
-       spotifyToken = data.access_token;
-       console.log(`Token recibido: ${spotifyToken}`);
-       axios.defaults.headers.common['Authorization'] = `Bearer ${spotifyToken}`;
-       buscarArtista();
-     })
-     .catch((error) => {
-       console.error("Error al obtener token:", error);
-       spotifyToken = null;
-     });
+  if (spotifyToken) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${spotifyToken}`;
+    buscarArtista(spotifyToken);
+    return;
   }
 
+  const auth = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
+
+  axios.post(
+    "https://accounts.spotify.com/api/token",
+    qs.stringify({ grant_type: "client_credentials" }),
+    {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${auth}`
+      }
+    }
+  )
+  .then(({ data }) => {
+    spotifyToken = data.access_token;
+    console.log(`Token recibido: ${spotifyToken}`);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${spotifyToken}`;
+    buscarArtista();
+  })
+  .catch((error) => {
+    console.error("Error al obtener token:", error);
+    spotifyToken = null;
+  });
+}
   function buscarArtista() {
      axios.get(`https://api.spotify.com/v1/search?q=${nombreArtista}&type=artist`) 
       .then(({ data }) => {
