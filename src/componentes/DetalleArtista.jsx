@@ -24,7 +24,7 @@ export function DetalleArtista({ artista, agregarArtistaFavorito, eliminarArtist
         </button>
 
         <div className="InfoArtistaDetalle">
-            <img src={artista.images?.[0]?.url} alt={artista.name} />
+            <img src={artista.images?.[0]?.url||artista.imageUrl} alt={artista.name} />
             
             <div className="NombreYFavorito">
                 <h2>{artista.name}</h2>
