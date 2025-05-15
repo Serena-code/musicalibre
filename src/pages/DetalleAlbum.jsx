@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-export function DetalleAlbum({ idAlbum }) {
+export function DetalleAlbum({ idAlbum,bandera }) {
   const [detalle, setDetalle] = useState([])
 
   function buscarDetalle(id) {

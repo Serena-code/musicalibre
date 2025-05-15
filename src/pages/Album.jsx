@@ -7,6 +7,8 @@ export function Album({ artista }) {
   const navigate = useNavigate();
   const [album, setAlbum] = useState([])
   const [albumSeleccionado, setAlbumSeleccionado] = useState(null)
+
+  
   
   function buscarAlbum(artista) {
     axios.get(`https://api.spotify.com/v1/artists/${artista.id}/albums`, {
@@ -21,6 +23,7 @@ export function Album({ artista }) {
 
   useEffect(() => {
     if (artista) {
+      setAlbumSeleccionado(null)
       buscarAlbum(artista)
     }
   }, [artista])

@@ -358,8 +358,8 @@ body {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 20px;
+  min-width: 100%;
 }
 
 .Album ul li {
@@ -372,6 +372,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 100px;
 }
 
 .Album ul li:hover {
